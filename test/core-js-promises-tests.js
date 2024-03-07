@@ -68,7 +68,7 @@ describe('core-js-promises', () => {
     'getFirstResolvedPromiseResult should returns containing the value of the first promise of a successfully resolved',
     (done) => {
       assert.equal(
-        forbidden.isCommented(tasks.getAllPromisesResult),
+        forbidden.isCommented(tasks.getFirstResolvedPromiseResult),
         false,
         `Be sure to remove comments from the final solution`
       );
@@ -98,14 +98,114 @@ describe('core-js-promises', () => {
         .catch((error) => {
           if (typeof error === 'undefined' && expectedResult === null) {
             done();
+          } else {
+            throw new Error(error);
           }
-          throw new Error(error);
         })
         .catch((error) => {
           if (error.code === 'ERR_ASSERTION') {
             done(error);
           } else {
             done(Error(`result must be fulfilled with ${expectedResult}`));
+          }
+        });
+    },
+    true
+  );
+
+  it.optional(
+    'getFirstPromiseResult should returns containing the value of the first promise of a resolved or a rejected',
+    (done) => {
+      assert.equal(
+        forbidden.isCommented(tasks.getFirstPromiseResult),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
+
+      const resolver = (number, latency) =>
+        number % 2 === 0
+          ? new Promise((resolve) => {
+              setTimeout(() => resolve(number), latency);
+            })
+          : new Promise((reject) => {
+              setTimeout(() => reject(number), latency);
+            });
+
+      const sourcePromises = [];
+      let expectedResult = null;
+      let minLatency = 10;
+      for (let i = 1; i <= 10; i += 1) {
+        const latency = utility.getRandomNumberUtil(0, 10);
+        sourcePromises.push(resolver(i, latency * 10));
+        if (minLatency > latency) {
+          expectedResult = i;
+          minLatency = latency;
+        }
+      }
+
+      const promise = tasks.getFirstPromiseResult(sourcePromises);
+      assert(
+        promise instanceof Promise,
+        `getFirstPromiseResult should return Promise`
+      );
+      promise
+        .then((result) => {
+          assert.equal(expectedResult, result);
+          done();
+        })
+        .catch((error) => {
+          done(error);
+        });
+    },
+    true
+  );
+
+  it.optional(
+    'getAllOrNothing should return an array of values that are contained in the result of promises resolution',
+    (done) => {
+      assert.equal(
+        forbidden.isCommented(tasks.getAllOrNothing),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
+
+      const resolver = (number) =>
+        number !== 0 ? Promise.resolve(number) : Promise.reject(number);
+      const sourcePromises = [];
+      const resultPromises = [];
+      let failResult = null;
+      for (let i = 0; i < 10; i += 1) {
+        const number = utility.getRandomNumberUtil(0, 5);
+        sourcePromises.push(resolver(number));
+        if (number !== 0) {
+          resultPromises.push(number);
+        } else {
+          failResult = number;
+        }
+      }
+
+      const promise = tasks.getAllOrNothing(sourcePromises);
+      assert(
+        promise instanceof Promise,
+        `getAllOrNothing should return Promise`
+      );
+      promise
+        .then((results) => {
+          assert.deepEqual(resultPromises, results);
+          done();
+        })
+        .catch((error) => {
+          if (typeof error === 'number' && error === failResult) {
+            done();
+          } else {
+            throw new Error(error);
+          }
+        })
+        .catch((error) => {
+          if (error.code === 'ERR_ASSERTION') {
+            done(error);
+          } else {
+            done(Error(`result must be rejected with ${failResult}`));
           }
         });
     },
