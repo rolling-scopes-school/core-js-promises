@@ -251,4 +251,52 @@ describe('core-js-promises', () => {
     },
     true
   );
+
+  it.optional(
+    'chainPromises should return a promise that is solved by a string sequentially added together from the results of each promis in the array',
+    (done) => {
+      assert.equal(
+        forbidden.isCommented(tasks.chainPromises),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
+      assert.equal(
+        forbidden.isPromiseUsed(tasks.chainPromises),
+        false,
+        `The use of static methods of the Promise classe is not allowed`
+      );
+
+      const resolver = (number, latency) =>
+        new Promise((resolve) => {
+          setTimeout(() => resolve(number), latency);
+        });
+
+      const sourcePromises = [];
+      let expectedResult = '';
+      const countPromise = utility.getRandomNumberUtil(10, 15);
+      for (let i = 0; i < countPromise; i += 1) {
+        const number = utility.getRandomNumberUtil(1, 10);
+        const latency = utility.getRandomNumberUtil(0, 10);
+        sourcePromises.push(resolver(number, latency * 10));
+        expectedResult += `${number}`;
+      }
+      console.log('expectedResult', expectedResult);
+      const promise = tasks.chainPromises(sourcePromises);
+      assert(promise instanceof Promise, `chainPromises should return Promise`);
+
+      promise
+        .then((results) => {
+          assert.deepEqual(expectedResult, results);
+          done();
+        })
+        .catch((error) => {
+          if (error.code === 'ERR_ASSERTION') {
+            done(error);
+          } else {
+            done(Error('result must be fulfilled'));
+          }
+        });
+    },
+    true
+  );
 });
