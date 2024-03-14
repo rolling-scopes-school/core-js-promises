@@ -13,11 +13,27 @@
  * @return {Promise<number>}
  *
  * @example:
- * -1   => Promise rejected
- * 0    => Promise fulfilled
- * 1    => Promise fulfilled
+ * -1   => promise that will be rejected
+ * 0    => promise that will be fulfilled
+ * 1    => promise that will be fulfilled
  */
 function getPromise(/* number */) {
+  throw new Error('Not implemented');
+}
+
+/**
+ * Returns a promise that will always fulfilled and return a value of success or fail.
+ * If the original promis is fulfilled, the value 'success' will be returned in fulfilled promise.
+ * If the original promis is rejected, the value 'fail' will be returned in fulfilled promise.
+ *
+ * @param {Promise} source
+ * @return {Promise<string>}
+ *
+ * @example:
+ * Promise.resolve('success') => promise that will be fulfilled with 'success' value
+ * Promise.reject('fail')     => promise that will be fulfilled with 'fail' value
+ */
+function getPromiseResult(/* source */) {
   throw new Error('Not implemented');
 }
 
@@ -86,35 +102,37 @@ function getAllOrNothing(/* promises */) {
  * [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)] => Promise fulfilled with [1, 2, 3]
  * [Promise.resolve(1), Promise.reject(2), Promise.resolve(3)]  => Promise fulfilled with [1, null, 3]
  */
-function getAllPromisesResult(/* promises */) {
+function getAllResult(/* promises */) {
   throw new Error('Not implemented');
 }
 
 /**
- * From the received array of promises creates a chain of promises, which will return the value of the last promice from the initial array
+ * Return a promise that is solved by a string sequentially added together from the results of each promis in the array.
+ * In this task, the use of static methods of the Promise classe is not allowed.
  *
  * @param {Array<Promise<number>>} promises
- * @return {Promise<number>}
+ * @return {Promise<string>}
  *
  * @example:
+ * const promise1 = Promise.resolve(10)
+ * const promise2 = Promise.resolve(20)
+ * const promise3 = Promise.resolve(30)
+ * const promise4 = new Promise((resolve) => setTimeout(() => resolve(40), 10))
+ *
+ * [promise1, promise3, promise2] => Promise.resolved('103020')
+ * [promise1, promise4, promise3] => Promise.resolved('104030')
+ * [promise1, promise4, promise3, promise2] => Promise.resolved('10403020')
  */
-function getChainPromises(/* promises */) {
-  throw new Error('Not implemented');
-}
-
-/**
- * TBD
- */
-function resolvePromiseHell(/* promises */) {
+function queuPromises(/* promises */) {
   throw new Error('Not implemented');
 }
 
 module.exports = {
   getPromise,
+  getPromiseResult,
   getFirstResolvedPromiseResult,
   getFirstPromiseResult,
   getAllOrNothing,
-  getAllPromisesResult,
-  getChainPromises,
-  resolvePromiseHell,
+  getAllResult,
+  queuPromises,
 };
