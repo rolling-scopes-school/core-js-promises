@@ -19,39 +19,41 @@ The task is to implement functions on different Core JS topics. This module requ
 5. To install all dependencies use `npm install`
 6. Each task is usually a regular function:
 
-   ```javascript
-   /**
-    * Determines whether a given number is positive. Zero is considered positive.
-    *
-    * @param {string} date - date and time.
-    * @return {number} milliseconds in timestamp.
-    *
-    * @example:
-    * '01 Jan 1970 00:00:00 GMT' => 0
-    * '04 Dec 1995 00:12:00 GMT' => 818035920000
-    */
-   function dateToTimestamp(/* date */) {
-     throw new Error('Not implemented');
-   }
-   ```
+```javascript
+/**
+ * Returns a promise object with a fulfilled result for a positive number and a rejected result if negative number.
+ * Zero is a positive number.
+ *
+ * @param {number} number
+ * @return {Promise<number>}
+ *
+ * @example:
+ * -1   => promise that will be rejected
+ * 0    => promise that will be fulfilled
+ * 1    => promise that will be fulfilled
+ */
+function getPromise(/* number */) {
+  throw new Error('Not implemented');
+}
+```
 
-   Read the task description in the comment above the function. Try to understand the idea. You can see the tests prepared if you don't understand it.
+Read the task description in the comment above the function. Try to understand the idea. You can see the tests prepared if you don't understand it.
 
 7. Write your code in `src/core-js-promises-tasks.js`.
 
-   Uncomment the incoming parameters:
+Uncomment the incoming parameters:
 
-   ```javascript
-   function dateToTimestamp(/* date */)
-   ```
+```javascript
+function getPromise(/* number */)
+```
 
-   Remove the throwing error line from function body:
+Remove the throwing error line from function body:
 
-   ```javascript
-   throw new Error('Not implemented');
-   ```
+```javascript
+throw new Error('Not implemented');
+```
 
-   Implement the function by any way and verify your solution by running tests until the failed test become passed (green).
+Implement the function by any way and verify your solution by running tests until the failed test become passed (green).
 
 8. Save the solution and run `npm test` in command line. If everything is OK you can try to resolve the next task.
 
