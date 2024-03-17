@@ -8,12 +8,6 @@ describe('core-js-promises', () => {
   it.optional(
     'getPromise should return a promise object with a fulfilled result for a positive number and a rejected result if negative number',
     (done) => {
-      assert.equal(
-        forbidden.isCommented(tasks.getPromise),
-        false,
-        `Be sure to remove comments from the final solution`
-      );
-
       const sourceNumbers = [
         utility.getRandomNumberUtil(-10, 10),
         utility.getRandomNumberUtil(-10, 10),
@@ -56,6 +50,12 @@ describe('core-js-promises', () => {
           done();
         }
       });
+
+      assert.equal(
+        forbidden.isCommented(tasks.getPromise),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
     },
     true
   );
@@ -63,12 +63,6 @@ describe('core-js-promises', () => {
   it.optional(
     'getPromiseResult should returns a promise that will return a value of success or fail',
     (done) => {
-      assert.equal(
-        forbidden.isCommented(tasks.getPromiseResult),
-        false,
-        `Be sure to remove comments from the final solution`
-      );
-
       const resolver = (number) =>
         number % 2 === 0 ? Promise.resolve() : Promise.reject();
 
@@ -105,6 +99,12 @@ describe('core-js-promises', () => {
           done();
         }
       });
+
+      assert.equal(
+        forbidden.isCommented(tasks.getPromiseResult),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
     },
     true
   );
@@ -112,12 +112,6 @@ describe('core-js-promises', () => {
   it.optional(
     'getFirstResolvedPromiseResult should returns containing the value of the first promise of a successfully resolved',
     (done) => {
-      assert.equal(
-        forbidden.isCommented(tasks.getFirstResolvedPromiseResult),
-        false,
-        `Be sure to remove comments from the final solution`
-      );
-
       const resolver = (number) =>
         number >= 0 ? Promise.resolve(number) : Promise.reject(number);
       const sourcePromises = [];
@@ -154,6 +148,12 @@ describe('core-js-promises', () => {
             done(Error(`result must be fulfilled with ${expectedResult}`));
           }
         });
+
+      assert.equal(
+        forbidden.isCommented(tasks.getFirstResolvedPromiseResult),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
     },
     true
   );
@@ -161,12 +161,6 @@ describe('core-js-promises', () => {
   it.optional(
     'getFirstPromiseResult should returns containing the value of the first promise of a resolved or a rejected',
     (done) => {
-      assert.equal(
-        forbidden.isCommented(tasks.getFirstPromiseResult),
-        false,
-        `Be sure to remove comments from the final solution`
-      );
-
       const resolver = (number, latency) =>
         number % 2 === 0
           ? new Promise((resolve) => {
@@ -201,6 +195,12 @@ describe('core-js-promises', () => {
         .catch((error) => {
           done(error);
         });
+
+      assert.equal(
+        forbidden.isCommented(tasks.getFirstPromiseResult),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
     },
     true
   );
@@ -208,12 +208,6 @@ describe('core-js-promises', () => {
   it.optional(
     'getAllOrNothing should return an array of values that are contained in the result of promises resolution',
     (done) => {
-      assert.equal(
-        forbidden.isCommented(tasks.getAllOrNothing),
-        false,
-        `Be sure to remove comments from the final solution`
-      );
-
       const resolver = (number) =>
         number !== 0 ? Promise.resolve(number) : Promise.reject(number);
       const sourcePromises = [];
@@ -253,6 +247,12 @@ describe('core-js-promises', () => {
             done(Error(`result must be rejected with ${failResult}`));
           }
         });
+
+      assert.equal(
+        forbidden.isCommented(tasks.getAllOrNothing),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
     },
     true
   );
@@ -260,12 +260,6 @@ describe('core-js-promises', () => {
   it.optional(
     'getAllResult should return an array of values that are contained in the result of promises resolution',
     (done) => {
-      assert.equal(
-        forbidden.isCommented(tasks.getAllResult),
-        false,
-        `Be sure to remove comments from the final solution`
-      );
-
       const resolver = (number) =>
         number >= 0 ? Promise.resolve(number) : Promise.reject(number);
       const sourcePromises = [];
@@ -290,6 +284,12 @@ describe('core-js-promises', () => {
             done(Error('result must be fulfilled'));
           }
         });
+
+      assert.equal(
+        forbidden.isCommented(tasks.getAllResult),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
     },
     true
   );
@@ -297,17 +297,6 @@ describe('core-js-promises', () => {
   it.optional(
     'queuPromises should return a promise that is solved by a string sequentially added together from the results of each promis in the array',
     (done) => {
-      assert.equal(
-        forbidden.isCommented(tasks.queuPromises),
-        false,
-        `Be sure to remove comments from the final solution`
-      );
-      assert.equal(
-        forbidden.isPromiseUsed(tasks.queuPromises),
-        false,
-        `The use of static methods of the Promise classe is not allowed`
-      );
-
       const resolver = (number, latency) =>
         new Promise((resolve) => {
           setTimeout(() => resolve(number), latency);
@@ -338,6 +327,17 @@ describe('core-js-promises', () => {
             done(Error('result must be fulfilled'));
           }
         });
+
+      assert.equal(
+        forbidden.isCommented(tasks.queuPromises),
+        false,
+        `Be sure to remove comments from the final solution`
+      );
+      assert.equal(
+        forbidden.isPromiseUsed(tasks.queuPromises),
+        false,
+        `The use of static methods of the Promise classe is not allowed`
+      );
     },
     true
   );
