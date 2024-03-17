@@ -110,7 +110,7 @@ function getAllResult(/* promises */) {
 
 /**
  * Takes an array of promises and processes them sequentially, concatenating each resolved value into a single string.
- * The resolution order is determined by the order of the promises in the array, not by their resolution time. 
+ * The resolution order is determined by the order of the promises in the array, not by their resolution time.
  * Static methods of the Promise class are not to be used, necessitating a manual chaining approach to ensure sequential processing.
  *
  * @param {Array<Promise<number>>} promises
