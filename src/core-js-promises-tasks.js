@@ -6,8 +6,8 @@
  ********************************************************************************************* */
 
 /**
- * Returns a promise object with a fulfilled result for a positive number and a rejected result if negative number.
- * Zero is a positive number.
+ * Returns a Promise that is fulfilled with the input number if the number is non-negative (including zero),
+ * and rejected if the number is negative.
  *
  * @param {number} number
  * @return {Promise<number>}
@@ -23,8 +23,8 @@ function getPromise(/* number */) {
 
 /**
  * Returns a promise that will always fulfilled and return a value of success or fail.
- * If the original promis is fulfilled, the value 'success' will be returned in fulfilled promise.
- * If the original promis is rejected, the value 'fail' will be returned in fulfilled promise.
+ * It returns a promise that is always fulfilled with a string value: 'success' if the original promise was fulfilled,
+ * and 'fail' if the original promise was rejected
  *
  * @param {Promise} source
  * @return {Promise<string>}
@@ -38,8 +38,8 @@ function getPromiseResult(/* source */) {
 }
 
 /**
- * Returns containing the value of the first promise of a successfully resolved.
- * If all promise is rejected, return rejected Promise.
+ * Takes an array of promises and returns a promise that resolves with the value of the first successfully resolved promise From the given array.
+ * If all promises in the array are rejected, it returns a promise that is rejected.
  *
  * @param {Array<Promise<number>>} promises
  * @return {Promise<number>}
@@ -78,7 +78,8 @@ function getFirstPromiseResult(/* promises */) {
 }
 
 /**
- * Returns an array of values if all promises completed successfully or a rejected promise if one of the source promises failed.
+ * Attempts to resolve all provided promises. If all promises resolve successfully, it returns a promise that resolves with an array of their values.
+ * If any of the promises are rejected, it returns a promise that is immediately rejected with the reason of the first promise that was rejected.
  *
  * @param {Array<Promise<number>>} promises
  * @return {Promise<Array<number>> }
@@ -92,11 +93,12 @@ function getAllOrNothing(/* promises */) {
 }
 
 /**
- * Returns an array of values that are contained in the result of promises resolution.
- * If promise is rejected, place a value of null.
+ * Processes an array of promises and returns a promise that resolves with an array of their results.
+ * Each element in the returned array corresponds to the resolved value of the promise at the same index in the input array.
+ * If a promise is rejected, the corresponding value in the output array will be null.
  *
  * @param {Array<Promise<number>>} promises
- * @return {Promise<Array<number>>}
+ * @return {Promise<Array<number | null>>}
  *
  * @example:
  * [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)] => Promise fulfilled with [1, 2, 3]
@@ -107,8 +109,9 @@ function getAllResult(/* promises */) {
 }
 
 /**
- * Return a promise that is solved by a string sequentially added together from the results of each promis in the array.
- * In this task, the use of static methods of the Promise classe is not allowed.
+ * Takes an array of promises and processes them sequentially, concatenating each resolved value into a single string.
+ * The resolution order is determined by the order of the promises in the array, not by their resolution time. 
+ * Static methods of the Promise class are not to be used, necessitating a manual chaining approach to ensure sequential processing.
  *
  * @param {Array<Promise<number>>} promises
  * @return {Promise<string>}
