@@ -336,7 +336,7 @@ describe('core-js-promises', () => {
       assert.equal(
         forbidden.isPromiseUsed(tasks.queuPromises),
         false,
-        `The use of static methods of the Promise classe is not allowed`
+        `The use of static methods of the Promise class is not allowed`
       );
     },
     true
