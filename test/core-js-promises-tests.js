@@ -295,7 +295,7 @@ describe('core-js-promises', () => {
   );
 
   it.optional(
-    'queuPromises should return a promise that is solved by a string sequentially added together from the results of each promis in the array',
+    'queuePromises should return a promise that is solved by a string sequentially added together from the results of each promis in the array',
     (done) => {
       const resolver = (number, latency) =>
         new Promise((resolve) => {
@@ -312,8 +312,8 @@ describe('core-js-promises', () => {
         expectedResult += `${number}`;
       }
 
-      const promise = tasks.queuPromises(sourcePromises);
-      assert(promise instanceof Promise, `queuPromises should return Promise`);
+      const promise = tasks.queuePromises(sourcePromises);
+      assert(promise instanceof Promise, `queuePromises should return Promise`);
 
       promise
         .then((results) => {
@@ -329,12 +329,12 @@ describe('core-js-promises', () => {
         });
 
       assert.equal(
-        forbidden.isCommented(tasks.queuPromises),
+        forbidden.isCommented(tasks.queuePromises),
         false,
         `Be sure to remove comments from the final solution`
       );
       assert.equal(
-        forbidden.isPromiseUsed(tasks.queuPromises),
+        forbidden.isPromiseUsed(tasks.queuePromises),
         false,
         `The use of static methods of the Promise class is not allowed`
       );
