@@ -230,7 +230,7 @@ describe('core-js-promises', () => {
       );
       promise
         .then((results) => {
-          assert.deepEqual(resultPromises, results);
+          assert.deepEqual(results, resultPromises);
           done();
         })
         .catch((error) => {
@@ -274,7 +274,7 @@ describe('core-js-promises', () => {
       assert(promise instanceof Promise, `getAllResult should return Promise`);
       promise
         .then((results) => {
-          assert.deepEqual(resultPromises, results);
+          assert.deepEqual(results, resultPromises);
           done();
         })
         .catch((error) => {
@@ -317,7 +317,7 @@ describe('core-js-promises', () => {
 
       promise
         .then((results) => {
-          assert.deepEqual(expectedResult, results);
+          assert.deepEqual(results, expectedResult);
           done();
         })
         .catch((error) => {
