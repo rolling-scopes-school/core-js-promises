@@ -137,5 +137,5 @@ module.exports = {
   getFirstPromiseResult,
   getAllOrNothing,
   getAllResult,
-  queuPromises,
+  queuePromises,
 };
